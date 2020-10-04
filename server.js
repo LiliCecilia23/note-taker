@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const uuid =require('uuid');
 
 const notes = require('./Develop/db/db.json');
 
@@ -25,15 +26,25 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    let newNote = req.body;
+    const newNote = {
+        id: uuid.v4(),
+        title: req.body.title,
+        text: req.body.text
+    }
 
     notes.push(newNote);
-    return res.json(notes);
+    return notes;
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-})
+    const id = notes.some(note => note.id === parseInt(req.params.id));
+
+    if (id) {
+        res.json(notes.filter(note => note.id === parseInt(req.params.id)))
+    } else {
+        res.status(400).json({ msg: 'No matching id'})
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server started on PORT: ${PORT}`);
