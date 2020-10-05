@@ -10,4 +10,17 @@ This app uses node.js and Express to create a server-hosted web note-taking appl
 * When you are ready, click the save icon in the top right corner
 * To start a new note, click the pencil icon in the top right corner
 * To see saved notes, refresh the page to have them display on your current page or go to ```note-taker000.herokuapp.com/api/notes``` to see a JSON view of all notes.
-* To delete 
+* To delete a note, click on the trash can icon next to the note you want to delete, then refresh the page
+
+<img src="./Develop/public/assets/images/note.png">
+
+## Technologies Used
+* HTML
+* CSS
+* JavaScript
+* jQuery
+* node.js
+* Express
+  
+## License
+Copyright 2020 Lili Clift Licensed under MIT License.
