@@ -13,13 +13,13 @@ app.use(express.json());
 app.use(express.static('./Develop/public'));
 
 // Routes
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '/Develop/public/notes.html'));
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '/Develop/public/index.html'));
+// });
 
 app.get('/api/notes', (req, res) => {
     return res.json(notes);
@@ -37,13 +37,16 @@ app.post('/api/notes', (req, res) => {
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-    const id = notes.some(note => note.id === parseInt(req.params.id));
+    let id = parseInt(req.params.id);
 
-    if (id) {
-        res.json(notes.filter(note => note.id === parseInt(req.params.id)))
-    } else {
-        res.status(400).json({ msg: 'No matching id'})
-    }
+    for (let i = 0; i < notes.length; i++){
+        if (id === notes[i].id){
+            notes.splice(i, 1);
+            return notes;
+        } else {
+            console.log(`No note matching id: ${id}`);
+        };
+    };
 });
 
 app.listen(PORT, () => {
