@@ -43,9 +43,7 @@ app.delete('/api/notes/:id', (req, res) => {
         if (id === notes[i].id){
             notes.splice(i, 1);
             return notes;
-        } else {
-            console.log(`No note matching id: ${id}`);
-        };
+        }
     };
 });
 
