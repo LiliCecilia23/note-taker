@@ -17,12 +17,8 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/Develop/public/notes.html'));
 });
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '/Develop/public/index.html'));
-// });
-
 app.get('/api/notes', (req, res) => {
-    return res.json(notes);
+    res.json(notes);
 });
 
 app.post('/api/notes', (req, res) => {
@@ -33,7 +29,7 @@ app.post('/api/notes', (req, res) => {
     }
 
     notes.push(newNote);
-    return notes;
+    res.json(notes);
 });
 
 app.delete('/api/notes/:id', (req, res) => {
@@ -42,7 +38,7 @@ app.delete('/api/notes/:id', (req, res) => {
     for (let i = 0; i < notes.length; i++){
         if (id === notes[i].id){
             notes.splice(i, 1);
-            return notes;
+            res.json(notes);
         }
     };
 });
